@@ -1,21 +1,18 @@
-(ns markov-elear.generator)
+(ns markov-elear.generator
+  (:require [clojure.string :as str]
+            [clojure.set :refer [union]]))
 
-; clojure.string/split
+(defn text->words [text]
+  (str/split text #"[\n|\s]"))
 
-(defn text->words [text])
+(defn words->transitions [words]
+  (partition-all 3 1 words))
 
-; partition-all
+(defn fmt-trans [[a b c]]
+  {[a b] (if c #{c} #{})})
 
-(defn words->transitions [words])
+(defn word-chain [word-transitions]
+  (reduce #(merge-with union % (fmt-trans %2)) {} word-transitions))
 
-; http://clojure.org/guides/destructuring
-
-(defn fmt-trans [trans])
-
-; merge-with, clojure.set/union, reduce
-
-(defn word-chain [word-transitions])
-
-; ->
-
-(defn text->word-chain [text])
+(defn text->word-chain [text]
+  (-> text text->words words->transitions word-chain))
