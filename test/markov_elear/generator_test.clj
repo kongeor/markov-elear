@@ -58,5 +58,5 @@
     (testing "multiple choices"
       (with-redefs [shuffle (fn [coll] coll)]
         (let [prefix ["And" "the"]]
-          (is (= ["And" "the" "Golden"]
-                 (walk-chain prefix chain prefix))))))))
+          (is (= ["And" "the" "Golden" "Grouse" "And" "the"]
+                 (take 6 (walk-chain prefix chain prefix)))))))))

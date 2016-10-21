@@ -61,3 +61,11 @@
 
 (with-redefs [rand-nth not-so-rnd]
   (rand-nth [1 2 3 4 5 6]))
+
+; lazy seqs
+
+(take 5 (range))
+
+(empty? #{})
+(first #{})
+
