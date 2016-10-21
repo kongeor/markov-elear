@@ -53,3 +53,11 @@
 (conj '(1 2 3) 4)
 (conj #{1 2 3} 4)
 
+
+(rand-nth [1 2 3 4 5 6])
+(shuffle [1 2 3 4 5 6])
+
+(defn not-so-rnd [coll] (first coll))
+
+(with-redefs [rand-nth not-so-rnd]
+  (rand-nth [1 2 3 4 5 6]))

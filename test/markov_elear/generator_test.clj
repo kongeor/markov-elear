@@ -54,4 +54,9 @@
     (testing "dead end"
       (let [prefix ["the" "Pobble"]]
         (is (= ["the" "Pobble" "who"]
-               (walk-chain prefix chain prefix)))))))
+               (walk-chain prefix chain prefix)))))
+    (testing "multiple choices"
+      (with-redefs [shuffle (fn [coll] coll)]
+        (let [prefix ["And" "the"]]
+          (is (= ["And" "the" "Golden"]
+                 (walk-chain prefix chain prefix))))))))

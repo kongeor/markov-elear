@@ -19,5 +19,5 @@
 
 (defn walk-chain [prefix chain result]
   (let [words (get chain prefix)
-        word (first words)]
+        word (last (shuffle words))]
     (conj result word)))
