@@ -16,3 +16,8 @@
 
 (defn text->word-chain [text]
   (-> text text->words words->transitions word-chain))
+
+(defn walk-chain [prefix chain result]
+  (let [words (get chain prefix)
+        word (first words)]
+    (conj result word)))

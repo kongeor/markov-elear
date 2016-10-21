@@ -39,3 +39,17 @@
 (avg (range 5))
 
 
+;; m2
+
+(get {:a 1 :b 2} :a)
+(get {:a 1 :b 2} :c :not-found)
+
+(first [1 2 3])
+(first #{3 2 1})
+(last [1 2 3])
+
+
+(conj [1 2 3] 4)
+(conj '(1 2 3) 4)
+(conj #{1 2 3} 4)
+
