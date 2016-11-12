@@ -2,6 +2,9 @@
   (:require [clojure.string :as str]
             [clojure.set :refer [union]]))
 
+;; ========
+;; m1
+
 (defn text->words [text]
   (str/split text #"[\n|\s]"))
 
@@ -17,11 +20,21 @@
 (defn text->word-chain [text]
   (-> text text->words words->transitions word-chain))
 
+;; ========
+;; m2
+
+(defn chain->text [chain]
+  (apply str (interpose " " chain)))
+
 (defn walk-chain [prefix chain result]
-  (let [words (get chain prefix)
-        suffixes (shuffle words)]
+  (let [suffixes (get chain prefix)]
     (if (empty? suffixes)
       result
-      (let [suffix (last suffixes)
-            prefix [(second prefix) suffix]]
-        (recur prefix chain (conj result suffix))))))
+      (let [suffix (first (shuffle suffixes))
+            new-prefix [(second prefix) suffix]
+            result-char-count (count (chain->text result))
+            suffix-char-count (inc (count suffix))          ;; notice inc
+            total-count-char (+ result-char-count suffix-char-count)]
+        (if (>= total-count-char 140)
+          result
+          (recur new-prefix chain (conj result suffix)))))))
