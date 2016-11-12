@@ -38,3 +38,7 @@
         (if (>= total-count-char 140)
           result
           (recur new-prefix chain (conj result suffix)))))))
+
+(defn generate-text [prefix chain]
+  (let [prefix (text->words prefix)]
+    (chain->text (walk-chain prefix chain prefix))))

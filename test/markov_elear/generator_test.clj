@@ -60,3 +60,15 @@
         (let [prefix ["And" "the"]]
           (is (= ["And" "the" "Pobble" "who"]
                  (take 6 (walk-chain prefix chain prefix)))))))))
+
+(deftest test-generate-text
+  (with-redefs [shuffle (fn [c] c)]
+    (let [chain {["who" nil] #{}
+                 ["Pobble" "who"] #{}
+                 ["the" "Pobble"] #{"who"}
+                 ["Grouse" "And"] #{"the"}
+                 ["Golden" "Grouse"] #{"And"}
+                 ["the" "Golden"] #{"Grouse"}
+                 ["And" "the"] #{"Pobble" "Golden"}}]
+      (is (= "the Pobble who" (generate-text "the Pobble" chain)))
+      (is (= "And the Pobble who" (generate-text "And the" chain))))))
