@@ -42,3 +42,11 @@
 (defn generate-text [prefix chain]
   (let [prefix (text->words prefix)]
     (chain->text (walk-chain prefix chain prefix))))
+
+(defn process-file [fname]
+  (text->word-chain
+    (slurp (clojure.java.io/resource fname))))
+
+(def files ["monad.txt" "quangle-wangle.txt"])
+
+(def data-chain (apply merge-with clojure.set/union (map process-file files)))

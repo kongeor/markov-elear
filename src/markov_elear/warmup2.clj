@@ -12,3 +12,9 @@
 
 ;; tests
 
+;; slurp
+
+;; apply
+
+;; merge-with
+
