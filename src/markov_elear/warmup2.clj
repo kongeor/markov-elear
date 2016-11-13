@@ -10,7 +10,7 @@
 
 ;; interpose, interleave
 
-;; tests
+;; ns, requires, tests
 
 ;; slurp
 
